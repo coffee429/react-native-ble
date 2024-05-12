@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   ScrollView,
   Text,
+  TextInput,
   useColorScheme,
   View,
 } from 'react-native';
@@ -15,6 +16,7 @@ import useBLE from './useBLE';
 function App(): React.JSX.Element {
   const [isScanning, setIsScanning] = useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
+  const [text, onChangeText] = useState<string>('');
 
   const {
     scanForDevices,
@@ -22,6 +24,7 @@ function App(): React.JSX.Element {
     requestPermissions,
     connectToDevice,
     connectedDevice,
+    sendMessage,
   } = useBLE();
 
   const backgroundStyle = {
@@ -57,8 +60,8 @@ function App(): React.JSX.Element {
             <Button title="Connect bluetooth" onPress={toggleScanning} />
             {allDevices
               .filter(device => device.name)
-              .map((device, index) => (
-                <View id={index.toString()} style={styles.peripheralButton}>
+              .map(device => (
+                <View style={styles.peripheralButton}>
                   <Button
                     color="#008000"
                     title={device.name ? device.name : ''}
@@ -66,6 +69,14 @@ function App(): React.JSX.Element {
                 </View>
               ))}
             {/* <Button>{allDevices.map(device => device.name)}</Button> */}
+          </View>
+          <View>
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangeText}
+              value={text}
+            />
+            <Button title="Send" onPress={() => sendMessage(text)}></Button>
           </View>
         </View>
       </ScrollView>

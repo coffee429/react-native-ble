@@ -93,7 +93,6 @@ export default function useBLE(): BluetoothLowEnergyApi {
       setConnectedDevice(deviceConnection);
       await device.discoverAllServicesAndCharacteristics();
       bleManager.stopDeviceScan();
-      sendMessage('Hello');
     } catch (e) {
       console.log('ERROR IN CONNECTION', e);
     }

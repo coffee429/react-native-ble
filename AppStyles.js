@@ -16,6 +16,15 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
   },
   peripheralButton: {
-    height: 100,
+    height: 40,
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    width: 200,
+    backgroundColor: '#ffffff',
+    color: '#000000',
   },
 });
